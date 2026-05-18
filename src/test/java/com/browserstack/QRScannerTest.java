@@ -80,19 +80,15 @@ public class QRScannerTest {
 
         // 3.a. Upload the QR code image to BrowserStack media storage
         bsMediaUrl = uploadMediaToBrowserStack(qrImagePath, bsUsername, bsAccessKey);
-//        bsMediaUrl = "media://0e5422a5c4d2cd933c313041b249f2fb6c7f072c";
         System.out.println("[QRScannerTest] QR image path : " + qrImagePath);
         System.out.println("[QRScannerTest] BrowserStack media URL: " + bsMediaUrl);
 
         // 3.b. Upload the QR code video to BrowserStack media storage
         bsVideoMediaUrl = uploadMediaToBrowserStack(qrVideoPath, bsUsername, bsAccessKey);
-//        bsVideoMediaUrl = "media://e810cad39ac60fe90cac9ebcaf4e63f5233d9c1d";
         System.out.println("[QRScannerTest] QR video path : " + qrVideoPath);
         System.out.println("[QRScannerTest] BrowserStack video media URL: " + bsVideoMediaUrl);
     }
-
-//    @BeforeClass(alwaysRun = true)
-//    @BeforeTest(alwaysRun = true)
+    
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
         // Create a RemoteWebDriver session on BrowserStack (Chrome with camera permissions)
