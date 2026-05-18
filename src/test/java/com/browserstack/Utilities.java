@@ -80,12 +80,16 @@ public class Utilities {
         }
 
         // Ensure dimensions are even (required by most video codecs)
-        int width = 500;
-        int height = 500;
+        int width = image.getWidth() % 2 == 0 ? image.getWidth() : image.getWidth() - 1;;
+        int height = image.getHeight() % 2 == 0 ? image.getHeight() : image.getHeight() - 1;
+
+        // Size of border around QR Code
+        int border = 100;
 
         // 1. Create the BufferedImage for the background
         // Use TYPE_INT_RGB for opaque images or TYPE_INT_ARGB for transparency
-        BufferedImage backgroundImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage backgroundImage = new BufferedImage(width + (border * 2),
+                height + (border * 2), BufferedImage.TYPE_INT_RGB);
 
         // 2. Get the Graphics2D context
         Graphics2D g2d = backgroundImage.createGraphics();
@@ -104,9 +108,6 @@ public class Utilities {
 
         AWTSequenceEncoder encoder = AWTSequenceEncoder.createSequenceEncoder(outputFile, 1);
         try {
-            // Ensure dimensions are even (required by most video codecs)
-//            int width = image.getWidth() % 2 == 0 ? image.getWidth() : image.getWidth() - 1;
-//            int height = image.getHeight() % 2 == 0 ? image.getHeight() : image.getHeight() - 1;
             BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
             frame.getGraphics().drawImage(backgroundImage, 0, 0, width, height, null);
             encoder.encodeImage(frame);
